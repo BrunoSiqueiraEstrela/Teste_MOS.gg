@@ -4,6 +4,15 @@ import { AppDataSource } from "./config/index";
 import { router } from "./Routes";
 import { InitialDataRequestController } from "./controllers/InitialDataRequestController";
 
+if(!process.env.PORT||!process.env.TWITCH_CLIENT_ID||!process.env.TWITCH_TOKEN||!process.env.SECRET){
+        console.log("Missing enviroment variables, app will not run");
+        process.exit(30);
+}
+
+
+
+
+
 
 const app = express();
 app.use(express.json());
