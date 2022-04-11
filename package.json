@@ -4,8 +4,7 @@
   "description": "Olá,",
   "main": "src/server.ts",
   "scripts": {
-    "start": "ts-node-dev src/server.ts",
-    "typeorm": " ./node_modules/typeorm/cli.ts"
+    "start": "ts-node-dev src/server.ts"
   },
   "repository": {
     "type": "git",
