@@ -12,7 +12,7 @@ export function Auth(request:Request, response: Response, next: NextFunction)
       const decoded = verify(token, process.env.SECRET);
     } catch (err) {
       return response.status(401).send("Invalid Token");
-  }
+    }
   return next();
 }
 

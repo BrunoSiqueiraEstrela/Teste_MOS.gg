@@ -12,11 +12,10 @@ const createUserController = new CreateUserController();
 const authenticateUserController = new AuthenticateUserController();
 const followController = new FollowController();
 const listStreamersController = new ListStreamersController();
+
 router.post('/signup', createUserController.handle);
 router.post('/login', authenticateUserController.handle);
-
 router.get('/streamers', Page , Auth  , listStreamersController.handle);
-
 router.post('/follow=:id', Auth, followController.handle);
 
 export { router };

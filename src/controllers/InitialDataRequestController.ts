@@ -32,7 +32,7 @@ class InitialDataRequestController{
       console.log("Erro ao atualizar os dados : ", err)
       throw new Error(err);
     }finally{
-      console.log( "Dados iniciais atualizados com sucesso!");
+      console.log( "Twitch APi Data Load Successful !");
     }
     
     }catch(err){
