@@ -85,7 +85,7 @@ Esse ENDPOINT é protegido e será necessário usar o `token` dado pelo login pa
 
 Retornara dados do usuário e do seu canal em forma ordenada e paginada. Ele funciona com uma query, indicando a página a ser exibida.
 
-#### Exemplo: http://localhost:4000/streamers?page=3 Retornara o resultado da página 3.
+#### Exemplo: http://localhost:POST/streamers?page=3 Retornara o resultado da página 3.
 
 Esse ENDPOINT também é protegido e precisa do `token` para acessar
 
