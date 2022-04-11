@@ -2,19 +2,17 @@ import { UserRepository } from "../repositories/UserRepositories";
 import { compare } from "bcryptjs";
 import { sign } from "jsonwebtoken";
 import 'dotenv/config';
-import { User } from "../entities/User";
 
 class AuthenticateUserService{
 
-  async execute({email,password}){
-
+  async execute({email, password}){
+    try{
     const user = await UserRepository.findOne({
       where: {
         email: email,
       },
     }) as any;
     
-
     if(!user){
       throw new Error("Usuário não encontrado");
     }
@@ -28,12 +26,18 @@ class AuthenticateUserService{
     }
     //generate token
     const token = sign(
-      { email: user.email },
+      { user_id:user.id,email: user.email },
       process.env.SECRET , 
       {expiresIn: 300,});
-      return token;
-  
-} 
+    const jsonResponse = {
+      "token": token
+    }
+      return jsonResponse;
+  }catch(err){
+    console.log("Erro ao autenticar usuário: ", err)
+    throw new Error(err);
+  } 
+}
 }
  
 export { AuthenticateUserService };

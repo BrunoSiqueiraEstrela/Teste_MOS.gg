@@ -1,21 +1,32 @@
 import axios from 'axios';
+import { TwitchApiAuthorization } from '../config/TwitchConfig';
+import { Channel } from '../entities/Channel';
+import { User } from '../entities/User';
 
 class RequestTwitchChannelDataService{
     
-     async getTwitchChannelData(broadcaster_id: string): Promise<any>{
-       const token = 'yo7js2lv8pwggwpcjy4drkjr1nsclr';
-        const url = ` https://api.twitch.tv/helix/channels?broadcaster_id=${broadcaster_id}`;
-        const config = {
-            headers: {
-                'Client-Id': 'uv7193jvckpj3ywybj3bt6kdup6q22',
-                Authorization: `Bearer ${token}`
-            }
-        }
+     async execute(broadcaster_id: string, user:User): Promise<any>{
+ 
+        const url = `https://api.twitch.tv/helix/channels?broadcaster_id=${broadcaster_id}`;
+        
         try{
-          const response = await axios.get(url,config);
-          return response.data;
+
+            const response = await axios.get(url,TwitchApiAuthorization);
+
+            const newChannelData = JSON.parse(JSON.stringify(response.data));
+
+            const channel = new Channel();
+
+            channel.user = user;
+            channel.game_name = newChannelData.data[0].game_name;
+            channel.title = newChannelData.data[0].title;
+            channel.language = newChannelData.data[0].broadcaster_language;
+            
+            return channel;
+
         }catch(err){
             console.log("Error: ", err);
+            throw new Error(err);
         }
     }
   

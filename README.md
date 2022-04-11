@@ -1,10 +1,14 @@
 # Teste_MOS.gg
 
 Olá,
-[] Completar tabelas users e channes usando a API da twitch
+[x] Completar tabelas users e channes usando a API da twitch
 [x] Criar sistema de login
 [x] /login
+[x] Sistema de autenticação de token
+[x] Sistema de autenticação de usuário
 [x] /signup
-[] /streamers
-[] /follow
-[] docker
+[x] Sistema de cadastro de usuário
+[x] Erros
+[X] /streamers
+[X] /follow
+[X] docker

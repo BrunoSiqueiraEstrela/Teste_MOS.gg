@@ -14,7 +14,7 @@ class AuthenticateUserController {
         email,
         password
       });
-      return response.json(token);
+      return response.status(200).json(token);
 
     }catch(err){
       return response.status(400).json({

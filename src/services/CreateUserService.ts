@@ -1,28 +1,40 @@
-import { AppDataSource } from "../config/index";
+
 import { UserRepository } from '../repositories/UserRepositories';
 import { hash } from "bcryptjs";
-
+import { User } from "../entities/User";
 
 class CreateUserService{
 
-  async execute({email,password}){
+  async execute({ email, password }){
+    try{
+      const user = await UserRepository.findOne({where:{ email:email }})
 
-    
-    const user = await UserRepository.findOne({where:{email:email}})
-    
-    console.log("User do caralho: ",user)
-
-    if(user){
-      throw new Error("Usuário já existe");
-    }
-
+      if(user){ 
+        throw new Error("Usuário já existe");
+      }
+ 
     const passwordHash = await hash(password, 8);
-    
-    UserRepository.create({
-      email,
-      password: passwordHash,
-    });
 
+    const newUser = new User();
+
+    newUser.experience = 0;
+    newUser.email = email;
+    newUser.password = passwordHash;
+    newUser.points = 0;
+    newUser.queue = 10;
+
+    UserRepository.save(newUser)
+    .then(() => {
+      console.log("Usuário criado com sucesso!")
+    })
+    .catch((err) => {
+      console.log("Erro ao criar usuário: ", err)
+      throw new Error(err);
+    });
+  }catch(err){
+    console.log("Erro ao criar usuário: ", err)
+    throw new Error(err);
   }
+}
 }
 export { CreateUserService }
